@@ -1,21 +1,11 @@
-language: ruby
-
 sudo: required
-services: docker
 
-rvm:
-#  - 2.1
-  - 2.2
-  - 2.3
-
-bundler_args: --without plugins
-
-env:
-  - KITCHEN_LOCAL_YAML=.kitchen.docker.yml
+services:
+  - docker
 
 script:
-  - bundle exec rake --tasks
-  - bundle exec rake rubocop
-  - bundle exec rake foodcritic
-  - bundle exec rake chefspec
-  - bundle exec rake kitchen:all
+  - wget -O- http://travis.debian.net/script.sh | sh -
+
+branches:
+  except:
+    - /^debian\/\d/
